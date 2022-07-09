@@ -8,6 +8,8 @@ list_2 = []
 list_3 = []
 list_4 = []
 list_5 = []
+PLAYER_SCORE = 0
+cpu_score = []
 
 
 def list_shuffler():
@@ -67,16 +69,18 @@ def compare_input(input_value):
     """
     Prints message if user input values match randomly generated values
     """
+    global PLAYER_SCORE
     ship_locations = new_cpu_ship_locations
     if input_value in ship_locations:
         print("Direct hit!!!")
-        return True
+        PLAYER_SCORE += 1
+        # return True
     else:
         print("You missed")
-        return False
+        # return False
 
 
-def player_guess_compare(rand_value):
+def player_guess_compare():
     """
     Gets input values from user and appends to list before comparing with
     randomly generated values.If the value of the lists match, a message is
@@ -85,6 +89,7 @@ def player_guess_compare(rand_value):
      user that they 'missed' and the loop continues.
     """
     while True:
+        print(PLAYER_SCORE)
         row_num = user_input_row()
         col_num = user_input_col()
         player_guess = []
@@ -93,7 +98,9 @@ def player_guess_compare(rand_value):
         print_user_input(col_num, row_num)
         print_updated_computer_board(row_num, col_num)
         memory(row_num, col_num)
-        if compare_input(player_guess):
+        compare_input(player_guess)
+        if PLAYER_SCORE > 3:
+            print(PLAYER_SCORE)
             break
 
 
@@ -164,11 +171,9 @@ def main():
     """
     intro_msg()
     cpu_ship_values()
-    print(new_cpu_ship_locations)
     returned_list = list_shuffler()
     shuffled_list(returned_list)
-    rand_value = random_ship_gen()
-    player_guess_compare(rand_value)
+    player_guess_compare()
     end()
 
 
