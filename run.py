@@ -1,7 +1,8 @@
 import random
 
-computer_board_list = [".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "@", "@", "@", "@"]
-
+computer_board_list = [".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."]
+computer_ship_locations = [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [3, 0], [3, 1], [3, 2], [3, 3], [3, 4], [4, 0], [4, 1], [4, 2], [4, 3], [4, 4]]
+new_cpu_ship_locations = []
 list_1 = []
 list_2 = []
 list_3 = []
@@ -57,11 +58,17 @@ def random_ship_gen():
     return random_integer_list
 
 
-def compare_input(input_value, rand_value):
+def cpu_ship_values():
+    four_ship_locations = random.sample(computer_ship_locations, 4)
+    new_cpu_ship_locations.extend(four_ship_locations)
+
+
+def compare_input(input_value):
     """
     Prints message if user input values match randomly generated values
     """
-    if input_value == rand_value:
+    ship_locations = new_cpu_ship_locations
+    if input_value in ship_locations:
         print("Direct hit!!!")
         return True
     else:
@@ -86,7 +93,7 @@ def player_guess_compare(rand_value):
         print_user_input(col_num, row_num)
         print_updated_computer_board(row_num, col_num)
         memory(row_num, col_num)
-        if compare_input(player_guess, rand_value):
+        if compare_input(player_guess):
             break
 
 
@@ -102,19 +109,17 @@ def print_updated_computer_board(row_num, col_num):
     Prints updated computer player board.
     """
 
-    row_number = row_num
-    col_number = col_num
-
-    if row_number == 0:
-        list_1[col_number] = "x"
-    elif row_number == 1:
-        list_2[col_number] = "x"
-    elif row_number == 2:
-        list_3[col_number] = "x"
-    elif row_number == 3:
-        list_4[col_number] = "x"
-    elif row_number == 4:
-        list_5[col_number] = "x"
+    if row_num == 0:
+        list_1[col_num] = "x"
+    elif row_num == 1:
+        list_2[col_num] = "x"
+    elif row_num == 2:
+        list_3[col_num] = "x"
+    elif row_num == 3:
+        list_4[col_num] = "x"
+    elif row_num == 4:
+        list_5[col_num] = "x"
+    print("CPU Player Board")
     print('  '.join(list_1))
     print('  '.join(list_2))
     print('  '.join(list_3))
@@ -145,43 +150,6 @@ def shuffled_list(returned_list):
     print('  '.join(list_5))
 
 
-# def shuffled_list(returned_list, row_num, col_num):
-#     """
-#     Slices shuffled list before printing 5 lists to represent
-#     computers player board.
-#     """
-    
-#     slice_1 = returned_list[0:5]
-#     list_1.extend(slice_1)
-#     slice_2 = returned_list[5:10]
-#     list_2.extend(slice_2)
-#     slice_3 = returned_list[10:15]
-#     list_3.extend(slice_3)
-#     slice_4 = returned_list[15:20]
-#     list_4.extend(slice_4)
-#     slice_5 = returned_list[20:25]
-#     list_5.extend(slice_5)
-
-#     row_number = row_num
-#     col_number = col_num
-
-#     if row_number == 0:
-#         list_1[col_number] = "x"
-#     elif row_number == 1:
-#         list_2[col_number] = "x"
-#     elif row_number == 2:
-#         list_3[col_number] = "x"
-#     elif row_number == 3:
-#         list_4[col_number] = "x"
-#     elif row_number == 4:
-#         list_5[col_number] = "x"
-#     print('  '.join(list_1))
-#     print('  '.join(list_2))
-#     print('  '.join(list_3))
-#     print('  '.join(list_4))
-#     print('  '.join(list_5))
-
-
 storage = []
 
 
@@ -195,6 +163,8 @@ def main():
     Runs all functions
     """
     intro_msg()
+    cpu_ship_values()
+    print(new_cpu_ship_locations)
     returned_list = list_shuffler()
     shuffled_list(returned_list)
     rand_value = random_ship_gen()
