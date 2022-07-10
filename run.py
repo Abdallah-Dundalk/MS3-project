@@ -89,7 +89,7 @@ def compare_input(input_value):
     global PLAYER_SCORE
     ship_locations = new_cpu_ship_locations
     if input_value in ship_locations:
-        print("Direct hit!!!")
+        print("You scored a direct hit!!!")
         PLAYER_SCORE += 1
         # return True
     else:
@@ -104,11 +104,11 @@ def compare_cpu_input(input_value):
     global CPU_SCORE
     ship_locations = computer_guesses
     if input_value in computer_guesses:
-        print("Computer Scored A Direct hit!!!")
+        print("The Computer Scored A Direct hit!!!")
         CPU_SCORE += 1
         # return True
     else:
-        print("Computer missed")
+        print("The Computer missed")
         # return False
 
 def player_guess_compare():
@@ -120,7 +120,7 @@ def player_guess_compare():
      user that they 'missed' and the loop continues.
     """
     while True:
-        print(PLAYER_SCORE)
+        print(f'\nYour score is {PLAYER_SCORE}, the Computers score is {CPU_SCORE}')
         row_num = user_input_row()
         col_num = user_input_col()
         player_guess = []
@@ -151,12 +151,10 @@ def player_guess_compare():
 
 def store_cpu_guesses(row_num, col_num):
     cpu_guesses.append([row_num, col_num])
-    print(f'The latest value for cpu guesses is {cpu_guesses}')
 
 
 def store_player_guesses(row_num, col_num):
     player_guesses.append([row_num, col_num])
-    print(f'The latest value for memory test is {player_guesses}')
 
 
 def end():
@@ -181,7 +179,7 @@ def print_updated_computer_board(row_num, col_num):
         list_4[col_num] = "x"
     elif row_num == 4:
         list_5[col_num] = "x"
-    print("CPU Player Board")
+    print("\nCPU Player Board")
     print('  '.join(list_1))
     print('  '.join(list_2))
     print('  '.join(list_3))
@@ -204,7 +202,7 @@ def print_updated_player_board(row_num, col_num):
         player_list_4[col_num] = "x"
     elif row_num == 4:
         player_list_5[col_num] = "x"
-    print("Player Board")
+    print("\nPlayer Board")
     print('  '.join(player_list_1))
     print('  '.join(player_list_2))
     print('  '.join(player_list_3))
@@ -227,6 +225,7 @@ def shuffled_list(returned_list):
     list_4.extend(slice_4)
     slice_5 = returned_list[20:25]
     list_5.extend(slice_5)
+    print("\nCPU Player board")
     print('  '.join(list_1))
     print('  '.join(list_2))
     print('  '.join(list_3))
@@ -268,8 +267,7 @@ def rand_row_and_col():
             print_player_board(random_row_num, random_col_num)
         if len(computer_guesses) > 3:
             break
-    print(computer_guesses)
-    print("Player Board")
+    print("\nPlayer Board")
     print('  '.join(player_list_1))
     print('  '.join(player_list_2))
     print('  '.join(player_list_3))
