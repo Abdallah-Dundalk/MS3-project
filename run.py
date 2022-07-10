@@ -141,7 +141,7 @@ def player_guess_compare():
         store_player_guesses(row_num, col_num)
         compare_input(player_guess)
         compare_cpu_input(cpu_guess)
-        if PLAYER_SCORE > 3:
+        if PLAYER_SCORE > 3 or CPU_SCORE > 3:
             print(PLAYER_SCORE)
             break
 
