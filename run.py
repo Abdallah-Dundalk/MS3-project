@@ -262,22 +262,6 @@ def shuffled_list(returned_list):
     print('  '.join(list_5))
 
 
-# player board code below this line...........................................
-
-# def player_ship_values():
-#     four_ship_locations = random.sample(computer_ship_locations, 4)
-#     player_ship_locations.extend(four_ship_locations)
-#     print(player_ship_locations)
-#     row_num_1 = player_ship_locations[0][0]
-#     row_num_2 = player_ship_locations[1][0]
-#     row_num_3 = player_ship_locations[2][0]
-#     row_num_4 = player_ship_locations[3][0]
-#     col_num_1 = player_ship_locations[0][1]
-#     col_num_2 = player_ship_locations[1][1]
-#     col_num_3 = player_ship_locations[2][1]
-#     col_num_4 = player_ship_locations[3][1]
-
-
 def rand_row_and_col():
     """
     This function generates two random integers, one for row and
@@ -351,30 +335,6 @@ def print_cpu_input(col, row):
     Prints message informing the user of the coloumn and row numbers chosen.
     """
     print(f'Computer has chosen row {row} and column {col}')
-
-
-# def Gen_player_ship_location():
-#     row_num = random.randint(0, 4)
-#     col_num = random.randint(0, 4)
-#     ship_location = []
-#     ship_location.append(row_num)
-#     ship_location.append(col_num)
-#     print(f'{ship_location} is the ship location randomly generated')
-#     return ship_location
-
-
-# def check_ship_values(ship_location):
-#     global NUM_OF_SHIPS
-#     ship_locations = player_ship_locations
-#     for x in range(4):
-#         if ship_location not in ship_locations:
-#             print(f'this is passed from the other function {ship_location}')
-#             ship_locations.append(ship_location)
-#             print(f' this is updated ship list after{ship_locations}')
-#             NUM_OF_SHIPS = NUM_OF_SHIPS+1
-#             print(NUM_OF_SHIPS)
-#         else:
-#             continue
 
 
 def main():
