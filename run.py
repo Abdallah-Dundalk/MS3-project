@@ -64,6 +64,14 @@ def user_input_row():
     return user_row_num
 
 
+def quit_game_or_continue():
+    """
+    Prompts user to enter 'n' to quit or any other key to continue
+    """
+    result = input("Enter any key to continue or n to quit game       ")
+    return result
+
+
 def print_user_input(col, row):
     """
     Prints message informing the user of the coloumn and row numbers chosen.
@@ -154,9 +162,21 @@ def player_guess_compare():
         print("------------------------------------------------------------\n")
         store_cpu_guesses(cpu_row_num, cpu_col_num)
         store_player_guesses(row_num, col_num)
+        quit_or_continue_value = quit_game_or_continue()
+        quit_or_continue(quit_or_continue_value)
         if PLAYER_SCORE > 3 or CPU_SCORE > 3:
             print(PLAYER_SCORE)
             break
+
+
+def quit_or_continue(value):
+    if value == "n":
+        print("Exiting game...")
+        exit()
+    else:
+        print('You chose to continue')
+
+
 
 
 def store_cpu_guesses(row_num, col_num):
