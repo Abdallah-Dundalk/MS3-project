@@ -52,16 +52,35 @@ def user_input_col():
     """
     Prompts user to enter column number and returns an integer
     """
-    user_col_num = int(input("Choose a column number\n"))
-    return user_col_num
+    while True:
+        try:
+            y = int(input("Choose a column number\n"))
+            if y in range(0, 5):
+                break
+            elif y not in range(0, 5):
+                print(f'{y} not between 0 and 4. Please choose a column number between 0 and 4' )
+        except ValueError:
+            print("The value you entered is not a number. Please enter a number")
+    return y
 
 
 def user_input_row():
     """
     Prompts user to enter row number and returns an integer.
     """
-    user_row_num = int(input("Choose a row number\n"))
-    return user_row_num
+    while True:
+        try:
+            x = int(input("Choose a row number\n"))
+            if x in range(0, 5):
+                break
+            elif x not in range(0, 5):
+                print(f'{x} not between 0 and 4. Please choose a number between 0 and 4' )
+        except ValueError:
+            print("The value you entered is not a number. Please enter a number")
+
+        # if validate_user_input_row(user_row_num):
+        #     break
+    return x
 
 
 def quit_game_or_continue():
@@ -174,7 +193,7 @@ def quit_or_continue(value):
         print("Exiting game...")
         exit()
     else:
-        print('You chose to continue')
+        print('\nYou chose to continue...\n')
 
 
 
