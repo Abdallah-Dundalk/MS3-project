@@ -196,8 +196,6 @@ def quit_or_continue(value):
         print('\nYou chose to continue...\n')
 
 
-
-
 def store_cpu_guesses(row_num, col_num):
     """
     Appends two integers (CPU players row and column guess) to cpu_guesses
@@ -369,7 +367,7 @@ def print_player_board(row_num, col_num):
         player_list_5[col_num] = "@"
 
 
-def print_cpu_input(col, row):
+def print_cpu_input(row, col):
     """
     Prints message informing the user of the coloumn and row numbers chosen.
     """
