@@ -1,9 +1,15 @@
 import random
 
-computer_board_list = [".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."]
-player_board_list = [".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."]
+computer_board_list = []
+player_board_list = []
+
+# 4 random samples are taken from this list and used for teh target ship coordinates
 computer_ship_locations = [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [3, 0], [3, 1], [3, 2], [3, 3], [3, 4], [4, 0], [4, 1], [4, 2], [4, 3], [4, 4]]
+
+# list of 4 ships coordinates targeted by player.
 new_cpu_ship_locations = []
+
+# list of 4 ships coordinates targeted by CPU.
 player_ship_locations = []
 list_1 = []
 list_2 = []
@@ -11,34 +17,57 @@ list_3 = []
 list_4 = []
 list_5 = []
 
-player_list_1 = [".", ".", ".", ".", "."]
-player_list_2 = [".", ".", ".", ".", "."]
-player_list_3 = [".", ".", ".", ".", "."]
-player_list_4 = [".", ".", ".", ".", "."]
-player_list_5 = [".", ".", ".", ".", "."]
+player_list_1 = []
+player_list_2 = []
+player_list_3 = []
+player_list_4 = []
+player_list_5 = []
 
 PLAYER_SCORE = 0
-NUM_OF_SHIPS = 0
 CPU_SCORE = 0
 
-
+# list of all guesses made by player
 player_guesses = []
 
-# need to chnage this variable name to player_board_generator
+# list of all play ship coordinates
 computer_guesses = []
 
+# list of all guesses made by CPU
 cpu_guesses = []
 
 # need to change this code becuase it doenst need to be shuffled, just print
 #  5 lists of "."
 
+def reset_game_values():
+    player_guesses.clear()
+    computer_guesses.clear()
+    computer_board_list.clear()
+    new_cpu_ship_locations.clear()
+    cpu_guesses.clear()
+    list_1.clear()
+    list_2.clear()
+    list_3.clear()
+    list_4.clear()
+    list_5.clear()
+    player_list_1.clear()
+    player_list_2.clear()
+    player_list_3.clear()
+    player_list_4.clear()
+    player_list_5.clear()
+    global PLAYER_SCORE
+    global CPU_SCORE
+    PLAYER_SCORE = 0
+    CPU_SCORE = 0
 
-def list_shuffler():
-    """
-    Shuffles computer_board_list
-    """
-    random.shuffle(computer_board_list)
-    return computer_board_list
+
+
+
+# def list_shuffler():
+#     """
+#     Shuffles computer_board_list
+#     """
+#     random.shuffle(computer_board_list)
+#     return computer_board_list
 
 
 def intro_msg():
@@ -98,17 +127,17 @@ def print_user_input(col, row):
     print(f'You have chosen row {row} and column {col}')
 
 
-def random_ship_gen():
-    """
-    Generates two random integers and appends to empty list.
-    """
-    random_integer_1 = random.randint(0, 4)
-    random_integer_2 = random.randint(0, 4)
-    random_integer_list = []
-    random_integer_list.append(random_integer_1)
-    random_integer_list.append(random_integer_2)
-    print(random_integer_list)
-    return random_integer_list
+# def random_ship_gen():
+#     """
+#     Generates two random integers and appends to empty list.
+#     """
+#     random_integer_1 = random.randint(0, 4)
+#     random_integer_2 = random.randint(0, 4)
+#     random_integer_list = []
+#     random_integer_list.append(random_integer_1)
+#     random_integer_list.append(random_integer_2)
+#     print(random_integer_list)
+#     return random_integer_list
 
 
 def cpu_ship_values():
@@ -209,13 +238,13 @@ def player_guess_compare():
         print("------------------------------------------------------------")
         print(f"Your score is {PLAYER_SCORE}, the Computer's score is {CPU_SCORE}")
         print("------------------------------------------------------------\n")
-        quit_or_continue_value = quit_game_or_continue()
-        quit_or_continue(quit_or_continue_value)
-        if PLAYER_SCORE > 3 or CPU_SCORE > 3:
+        result = quit_game_or_continue()
+        quit_or_continue(result)
+        if PLAYER_SCORE > 3:
             print("You have sank all of the CPU's ships! Congratulations, you win!")
             break
         elif CPU_SCORE > 3:
-            print("TThe CPU has sank all of your ships! Commiserations, you lose!")
+            print("The CPU has sank all of your ships! Commiserations, you lose!")
             break
 
 
@@ -226,6 +255,17 @@ def quit_or_continue(value):
         exit()
     else:
         print('\nYou chose to continue...\n')
+
+
+def Play_new_game_or_quit(value):
+    if value == "n":
+        print("Exiting game...")
+        return True
+        exit()
+    else:
+        print('\nStarting new game...\n')
+        
+
 
 
 def store_cpu_guesses(row_num, col_num):
@@ -248,7 +288,7 @@ def end():
     """
     Prints 'game over' when game is over.
     """
-    print("game over")
+    print("Game Over")
 
 
 def print_updated_computer_board(row_num, col_num):
@@ -307,21 +347,21 @@ def print_updated_player_board(row_num, col_num):
     print('  '.join(player_list_5))
 
 
-def shuffled_list(returned_list):
+def print_cpus_board(list):
     """
     Slices shuffled list before printing 5 lists to represent
     computers player board.
     """
 
-    slice_1 = returned_list[0:5]
+    slice_1 = list[0:5]
     list_1.extend(slice_1)
-    slice_2 = returned_list[5:10]
+    slice_2 = list[5:10]
     list_2.extend(slice_2)
-    slice_3 = returned_list[10:15]
+    slice_3 = list[10:15]
     list_3.extend(slice_3)
-    slice_4 = returned_list[15:20]
+    slice_4 = list[15:20]
     list_4.extend(slice_4)
-    slice_5 = returned_list[20:25]
+    slice_5 = list[20:25]
     list_5.extend(slice_5)
     print("\nCPU Player board")
     print('  '.join(list_1))
@@ -329,6 +369,20 @@ def shuffled_list(returned_list):
     print('  '.join(list_3))
     print('  '.join(list_4))
     print('  '.join(list_5))
+
+
+def slice_list_for_player_board(list):
+    slice_1 = list[0:5]
+    player_list_1.extend(slice_1)
+    slice_2 = list[5:10]
+    player_list_2.extend(slice_2)
+    slice_3 = list[10:15]
+    player_list_3.extend(slice_3)
+    slice_4 = list[15:20]
+    player_list_4.extend(slice_4)
+    slice_5 = list[20:25]
+    player_list_5.extend(slice_5)
+
 
 
 def rand_row_and_col():
@@ -406,17 +460,33 @@ def print_cpu_input(row, col):
     print(f'Computer has chosen row {row} and column {col}')
 
 
+test_list = []
+
+
+def generate_list():
+    for x in range(25):
+        computer_board_list.append(".")
+    return computer_board_list
+
+
 def main():
     """
     Runs all functions
     """
-    intro_msg()
-    cpu_ship_values()
-    returned_list = list_shuffler()
-    shuffled_list(returned_list)
-    rand_row_and_col()
-    player_guess_compare()
-    end()
     
+    while True:
+        reset_game_values()
+        intro_msg()
+        generate_list()
+        print_cpus_board(generate_list())
+        slice_list_for_player_board(generate_list())
+        cpu_ship_values()
+        rand_row_and_col()
+        player_guess_compare()
+        end()
+        result = quit_game_or_continue()
+        if Play_new_game_or_quit(result):
+            exit()
+        
 
 main()
