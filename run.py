@@ -74,7 +74,7 @@ def user_input_row():
             if x in range(0, 5):
                 break
             elif x not in range(0, 5):
-                print(f'{x} not between 0 and 4. Please choose a number between 0 and 4' )
+                print(f'{x} not between 0 and 4. Please choose a number between 0 and 4')
         except ValueError:
             print("The value you entered is not a number. Please enter a number")
 
@@ -148,6 +148,52 @@ def compare_cpu_input(input_value):
         # return False
 
 
+def player_input_validator():
+    """
+    Creates a list using the validated row and column numbers chosen by the
+    user. The list is then compared with teh player_guesses list and appended
+    to the player_guessses list if not already present.
+    If the players chosen coordintes are in the list, a message is printed 
+    informing the user of this and prompts the user to try again.
+    """
+    while True:
+        row_num = user_input_row()
+        col_num = user_input_col()
+        player_guess = []
+        player_guess.append(row_num)
+        player_guess.append(col_num)
+        if player_guess not in player_guesses:
+            store_player_guesses(row_num, col_num)
+            print_updated_computer_board(row_num, col_num)
+            print_user_input(col_num, row_num)
+            compare_input(player_guess)
+            break
+        else:
+            print("You have already chosen these coordinates, try again")
+    
+
+def cpu_input_validator():
+    """
+    Creates a list using the validated row and column numbers chosen by the
+    user. The list is then compared with teh player_guesses list and appended
+    to the player_guessses list if not already present.
+    If the players chosen coordintes are in the list, a message is printed 
+    informing the user of this and prompts the user to try again.
+    """
+    while True:
+        cpu_row_num = rand_row_num()
+        cpu_col_num = rand_col_num()
+        cpu_guess = []
+        cpu_guess.append(cpu_row_num)
+        cpu_guess.append(cpu_col_num)
+        if cpu_guess not in cpu_guesses:
+            store_cpu_guesses(cpu_row_num, cpu_col_num)
+            print_updated_player_board(cpu_row_num, cpu_col_num)
+            print_cpu_input(cpu_row_num, cpu_col_num)
+            compare_cpu_input(cpu_guess)
+            break
+        
+
 def player_guess_compare():
     """
     Gets input values from user and appends to list before comparing with
@@ -158,34 +204,20 @@ def player_guess_compare():
      user that they 'missed' and the loop continues.
     """
     while True:
-        
-        row_num = user_input_row()
-        col_num = user_input_col()
-        player_guess = []
-        player_guess.append(row_num)
-        player_guess.append(col_num)
-# this is where the computer makes a guess
-        cpu_row_num = rand_row_num()
-        cpu_col_num = rand_col_num()
-        cpu_guess = []
-        cpu_guess.append(cpu_row_num)
-        cpu_guess.append(cpu_col_num)
-        print_updated_computer_board(row_num, col_num)
-        print_updated_player_board(cpu_row_num, cpu_col_num)
-        print_user_input(col_num, row_num)
-        compare_input(player_guess)
-        print_cpu_input(cpu_row_num, cpu_col_num)
-        compare_cpu_input(cpu_guess)
+        player_input_validator()
+        cpu_input_validator()    
         print("------------------------------------------------------------")
         print(f"Your score is {PLAYER_SCORE}, the Computer's score is {CPU_SCORE}")
         print("------------------------------------------------------------\n")
-        store_cpu_guesses(cpu_row_num, cpu_col_num)
-        store_player_guesses(row_num, col_num)
         quit_or_continue_value = quit_game_or_continue()
         quit_or_continue(quit_or_continue_value)
         if PLAYER_SCORE > 3 or CPU_SCORE > 3:
-            print(PLAYER_SCORE)
+            print("You have sank all of the CPU's ships! Congratulations, you win!")
             break
+        elif CPU_SCORE > 3:
+            print("TThe CPU has sank all of your ships! Commiserations, you lose!")
+            break
+
 
 
 def quit_or_continue(value):
