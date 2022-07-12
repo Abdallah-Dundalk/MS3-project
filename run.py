@@ -155,6 +155,21 @@ def compare_input(input_value):
     global PLAYER_SCORE
     ship_locations = new_cpu_ship_locations
     if input_value in ship_locations:
+        row_num = input_value[0]
+        col_num = input_value[1]
+        if row_num == 0:
+            list_1[col_num] = "*"
+        elif row_num == 1:
+            list_2[col_num] = "*"
+        elif row_num == 2:
+            list_3[col_num] = "*"
+        elif row_num == 3:
+            list_4[col_num] = "*"
+        elif row_num == 4:
+            list_5[col_num] = "*"
+
+
+
         print("You scored a direct hit!!!")
         PLAYER_SCORE += 1
         # return True
@@ -193,7 +208,7 @@ def player_input_validator():
         player_guess.append(col_num)
         if player_guess not in player_guesses:
             store_player_guesses(row_num, col_num)
-            print_updated_computer_board(row_num, col_num)
+            print_updated_computer_board(row_num, col_num, player_guess)
             print_user_input(col_num, row_num)
             compare_input(player_guess)
             break
@@ -217,7 +232,7 @@ def cpu_input_validator():
         cpu_guess.append(cpu_col_num)
         if cpu_guess not in cpu_guesses:
             store_cpu_guesses(cpu_row_num, cpu_col_num)
-            print_updated_player_board(cpu_row_num, cpu_col_num)
+            print_updated_player_board(cpu_row_num, cpu_col_num, cpu_guess)
             print_cpu_input(cpu_row_num, cpu_col_num)
             compare_cpu_input(cpu_guess)
             break
@@ -291,7 +306,7 @@ def end():
     print("Game Over")
 
 
-def print_updated_computer_board(row_num, col_num):
+def print_updated_computer_board(row_num, col_num, ship_location):
     """
     Prints updated copmuter board using two arguments 
     for row and column number. Each list represents a row on the board. 
@@ -300,7 +315,17 @@ def print_updated_computer_board(row_num, col_num):
     All lists are then printed with the updated 'x' representing the 
     players guess.
     """
+    ship_location = [row_num, col_num]
+    ship_locations = new_cpu_ship_locations
+    row_num = ship_location[0]
+    col_num = ship_location[1]
+    if ship_location in ship_locations:
+        ship_hit(row_num, col_num)        
+    else:
+        ship_missed(row_num, col_num)
+        
 
+def ship_missed(row_num, col_num):
     if row_num == 0:
         list_1[col_num] = "x"
     elif row_num == 1:
@@ -319,7 +344,28 @@ def print_updated_computer_board(row_num, col_num):
     print('  '.join(list_5))
 
 
-def print_updated_player_board(row_num, col_num):
+def ship_hit(row_num, col_num):
+    if row_num == 0:
+        list_1[col_num] = "*"
+    elif row_num == 1:
+        list_2[col_num] = "*"
+    elif row_num == 2:
+        list_3[col_num] = "*"
+    elif row_num == 3:
+        list_4[col_num] = "*"
+    elif row_num == 4:
+        list_5[col_num] = "*"
+    print("\nCPU Player Board")
+    print('  '.join(list_1))
+    print('  '.join(list_2))
+    print('  '.join(list_3))
+    print('  '.join(list_4))
+    print('  '.join(list_5))
+
+
+
+
+def print_updated_player_board(row_num, col_num, ship_locations):
     """
     Prints updated player board using two arguments 
     for row and column number. Each list represents a row on the board. 
@@ -329,22 +375,57 @@ def print_updated_player_board(row_num, col_num):
     players guess.
     """
 
+    ship_location = [row_num, col_num]
+    ship_locations = computer_guesses
+    row_num = ship_location[0]
+    col_num = ship_location[1]
+    if ship_location in ship_locations:
+        cpu_hit_ship(row_num, col_num)     
+    else:
+        cpu_missed_ship(row_num, col_num) 
+
+def cpu_missed_ship(row_num, col_num):
     if row_num == 0:
-        player_list_1[col_num] = "x"
+        player_list_1[col_num] = "8"
     elif row_num == 1:
-        player_list_2[col_num] = "x"
+        player_list_2[col_num] = "8"
     elif row_num == 2:
-        player_list_3[col_num] = "x"
+        player_list_3[col_num] = "8"
     elif row_num == 3:
-        player_list_4[col_num] = "x"
+        player_list_4[col_num] = "8"
     elif row_num == 4:
-        player_list_5[col_num] = "x"
+        player_list_5[col_num] = "8"
     print("\nPlayer Board")
     print('  '.join(player_list_1))
     print('  '.join(player_list_2))
     print('  '.join(player_list_3))
     print('  '.join(player_list_4))
     print('  '.join(player_list_5))
+
+
+def cpu_hit_ship(row_num, col_num):
+    if row_num == 0:
+        player_list_1[col_num] = "*"
+    elif row_num == 1:
+        player_list_2[col_num] = "*"
+    elif row_num == 2:
+        player_list_3[col_num] = "*"
+    elif row_num == 3:
+        player_list_4[col_num] = "*"
+    elif row_num == 4:
+        player_list_5[col_num] = "*"
+    print("\nPlayer Board")
+    print('  '.join(player_list_1))
+    print('  '.join(player_list_2))
+    print('  '.join(player_list_3))
+    print('  '.join(player_list_4))
+    print('  '.join(player_list_5))
+
+
+
+
+
+
 
 
 def print_cpus_board(list):
