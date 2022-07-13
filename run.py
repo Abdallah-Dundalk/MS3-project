@@ -74,6 +74,9 @@ def intro_msg():
 
 
 def add_name():
+    """
+    Prompts user to enter name
+    """
     name = str(input("Enter your name to begin..."))
     player_name.append(name)
 
@@ -235,19 +238,19 @@ def player_guess_compare():
         result = quit_game_or_continue()
         quit_or_continue(result)
         if PLAYER_SCORE > 3:
-            ("------------------------------------------------------------")
+            print("------------------------------------------------------------")
             print("You have sank all of the CPU's ships! Congratulations, you win!")
-            ("------------------------------------------------------------")
+            print("------------------------------------------------------------")
             break
         elif CPU_SCORE > 3:
-            ("------------------------------------------------------------")
+            print("------------------------------------------------------------")
             print("The CPU has sank all of your ships! Commiserations, you lose!")
-            ("------------------------------------------------------------")
+            print("------------------------------------------------------------")
             break
         elif PLAYER_SCORE and CPU_SCORE == 4:
-            ("------------------------------------------------------------")
+            print("------------------------------------------------------------")
             print("Tie game! All ships have been wiped out lol")
-            ("------------------------------------------------------------")
+            print("------------------------------------------------------------")
             break
 
 
