@@ -26,6 +26,7 @@ player_list_5 = []
 
 PLAYER_SCORE = 0
 CPU_SCORE = 0
+player_name = []
 
 # list of all guesses made by player
 player_guesses = []
@@ -72,6 +73,11 @@ def intro_msg():
     print("Lets Play Battle Ship\n")
 
 
+def add_name():
+    name = str(input("Enter your name to begin..."))
+    player_name.append(name)
+
+
 def user_input_col():
     """
     Prompts user to enter column number. If the value entered is not
@@ -81,7 +87,7 @@ def user_input_col():
     """
     while True:
         try:
-            y = int(input("Choose a column number\n"))
+            y = int(input("\nChoose a column number\n"))
             if y in range(0, 5):
                 break
             elif y not in range(0, 5):
@@ -100,13 +106,13 @@ def user_input_row():
     """
     while True:
         try:
-            x = int(input("Choose a row number\n"))
+            x = int(input("\nChoose a row number\n"))
             if x in range(0, 5):
                 break
             elif x not in range(0, 5):
-                print(f'{x} not between 0 and 4. Please choose a number between 0 and 4')
+                print(f'{x} not between 0 and 4. Please choose a number between 0 and 4\n')
         except ValueError:
-            print("The value you entered is not a number. Please enter a number")
+            print("The value you entered is not a number. Please enter a number\n")
 
     return x
 
@@ -123,7 +129,7 @@ def print_user_input(col, row):
     """
     Prints message informing the user of the coloumn and row numbers chosen.
     """
-    print(f'You have chosen row {row} and column {col}')
+    print(f'\nYou have chosen row {row} and column {col}')
 
 
 def cpu_ship_values():
@@ -224,8 +230,8 @@ def player_guess_compare():
         player_input_validator()
         cpu_input_validator()
         print("------------------------------------------------------------")
-        print(f"Your score is {PLAYER_SCORE}, the Computer's score is {CPU_SCORE}")
-        print("------------------------------------------------------------\n")
+        print(f"At the end of this round, your score is {PLAYER_SCORE}, the Computer's score is {CPU_SCORE}")
+        print("------------------------------------------------------------")
         result = quit_game_or_continue()
         quit_or_continue(result)
         if PLAYER_SCORE > 3:
@@ -389,7 +395,7 @@ def cpu_missed_ship(row_num, col_num):
         player_list_4[col_num] = "x"
     elif row_num == 4:
         player_list_5[col_num] = "x"
-    print("\nPlayer Board")
+    print(f"\n{' '.join(player_name)}'s Board")
     print('  '.join(player_list_1))
     print('  '.join(player_list_2))
     print('  '.join(player_list_3))
@@ -412,7 +418,7 @@ def cpu_hit_ship(row_num, col_num):
         player_list_4[col_num] = "*"
     elif row_num == 4:
         player_list_5[col_num] = "*"
-    print("\nPlayer Board")
+    print(f"\n{' '.join(player_name)}'s Board")
     print('  '.join(player_list_1))
     print('  '.join(player_list_2))
     print('  '.join(player_list_3))
@@ -485,7 +491,7 @@ def rand_row_and_col():
             print_player_board(random_row_num, random_col_num)
         if len(computer_guesses) > 3:
             break
-    print("\nPlayer Board")
+    print(f"\n{' '.join(player_name)}'s Board")
     print('  '.join(player_list_1))
     print('  '.join(player_list_2))
     print('  '.join(player_list_3))
@@ -532,7 +538,7 @@ def print_cpu_input(row, col):
     """
     Prints message informing the user of the coloumn and row numbers chosen.
     """
-    print(f'Computer has chosen row {row} and column {col}')
+    print(f'\nComputer has chosen row {row} and column {col}')
 
 
 test_list = []
@@ -555,6 +561,7 @@ def main():
     while True:
         reset_game_values()
         intro_msg()
+        add_name()
         generate_list()
         print_cpus_board(generate_list())
         slice_list_for_player_board(generate_list())
