@@ -235,10 +235,19 @@ def player_guess_compare():
         result = quit_game_or_continue()
         quit_or_continue(result)
         if PLAYER_SCORE > 3:
+            ("------------------------------------------------------------")
             print("You have sank all of the CPU's ships! Congratulations, you win!")
+            ("------------------------------------------------------------")
             break
         elif CPU_SCORE > 3:
+            ("------------------------------------------------------------")
             print("The CPU has sank all of your ships! Commiserations, you lose!")
+            ("------------------------------------------------------------")
+            break
+        elif PLAYER_SCORE and CPU_SCORE == 4:
+            ("------------------------------------------------------------")
+            print("Tie game! All ships have been wiped out lol")
+            ("------------------------------------------------------------")
             break
 
 
@@ -288,7 +297,7 @@ def end():
     """
     Prints 'game over' when game is over.
     """
-    print("Game Over")
+    print("\nGame Over\n")
 
 
 def print_updated_computer_board(row_num, col_num, ship_location):
