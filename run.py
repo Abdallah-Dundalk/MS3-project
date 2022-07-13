@@ -186,7 +186,7 @@ def player_input_validator():
             break
         else:
             print("You have already chosen these coordinates, try again")
-    
+
 
 def cpu_input_validator():
     """
@@ -208,21 +208,21 @@ def cpu_input_validator():
             print_cpu_input(cpu_row_num, cpu_col_num)
             compare_cpu_input(cpu_guess)
             break
-        
+
 
 def player_guess_compare():
     """
     This function is a loop that accepts player and cpu guesses, then validates
     the player guesses are not text and with range 0 -4. The guesses are then
     printed. Then the scores are printed and the scores are incremented by 1 if
-    any player hits a ship. The the player is prompted to enter values to 
+    any player hits a ship. The the player is prompted to enter values to
     either continue playing the game or quit. If the player continues, the
     loop begins again and will end only if the player quits or the score
     increments to 4.
     """
     while True:
         player_input_validator()
-        cpu_input_validator()    
+        cpu_input_validator()
         print("------------------------------------------------------------")
         print(f"Your score is {PLAYER_SCORE}, the Computer's score is {CPU_SCORE}")
         print("------------------------------------------------------------\n")
@@ -241,7 +241,7 @@ def quit_or_continue(value):
     Recieves one value, 'n' to quite programe or any other key to
     continue playing the game.
     """
-    
+
     if value == "n":
         print("Exiting game...")
         exit()
@@ -249,7 +249,7 @@ def quit_or_continue(value):
         print('\nYou chose to continue...\n')
 
 
-def Play_new_game_or_quit(value):
+def play_new_game_or_quit(value):
     """
     Recieves one value, 'n' to quite programe or any other key to
     play a new game.
@@ -260,7 +260,7 @@ def Play_new_game_or_quit(value):
         exit()
     else:
         print('\nStarting new game...\n')
-        
+
 
 def store_cpu_guesses(row_num, col_num):
     """
@@ -300,10 +300,10 @@ def print_updated_computer_board(row_num, col_num, ship_location):
     row_num = ship_location[0]
     col_num = ship_location[1]
     if ship_location in ship_locations:
-        ship_hit(row_num, col_num)        
+        ship_hit(row_num, col_num)
     else:
         ship_missed(row_num, col_num)
-        
+
 
 def ship_missed(row_num, col_num):
     """
@@ -368,9 +368,9 @@ def print_updated_player_board(row_num, col_num, ship_locations):
     row_num = ship_location[0]
     col_num = ship_location[1]
     if ship_location in ship_locations:
-        cpu_hit_ship(row_num, col_num)     
+        cpu_hit_ship(row_num, col_num)
     else:
-        cpu_missed_ship(row_num, col_num) 
+        cpu_missed_ship(row_num, col_num)
 
 
 def cpu_missed_ship(row_num, col_num):
@@ -465,7 +465,7 @@ def rand_row_and_col():
     """
     This function generates two random integers, one for row and
     one for column. The row and column numnber are then appended to
-    the "storage" list. 
+    the "storage" list.
     The function then checks if the 'computer_storage'
     list contains the 'storage' list.
     If the computer_storage list does not already contain the 'storage' value,
@@ -480,7 +480,6 @@ def rand_row_and_col():
         storage = []
         storage.append(random_row_num)
         storage.append(random_col_num)
-        
         if storage not in computer_guesses:
             computer_guesses.append(storage)
             print_player_board(random_row_num, random_col_num)
@@ -564,7 +563,7 @@ def main():
         player_guess_compare()
         end()
         result = quit_game_or_continue()
-        if Play_new_game_or_quit(result):
+        if play_new_game_or_quit(result):
             exit()
 
 
