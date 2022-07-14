@@ -407,7 +407,7 @@ def cpu_missed_ship(row_num, col_num):
         player_list_4[col_num] = "x"
     elif row_num == 4:
         player_list_5[col_num] = "x"
-    print(f"\n{' '.join(player_name)}'s Board")
+    print(f"\n{' '.join(player_name)}'s Board:")
     print('  '.join(player_list_1))
     print('  '.join(player_list_2))
     print('  '.join(player_list_3))
@@ -430,7 +430,7 @@ def cpu_hit_ship(row_num, col_num):
         player_list_4[col_num] = "*"
     elif row_num == 4:
         player_list_5[col_num] = "*"
-    print(f"\n{' '.join(player_name)}'s Board")
+    print(f"\n{' '.join(player_name)}'s Board:")
     print('  '.join(player_list_1))
     print('  '.join(player_list_2))
     print('  '.join(player_list_3))
@@ -454,7 +454,7 @@ def print_cpus_board(list):
     list_4.extend(slice_4)
     slice_5 = list[20:25]
     list_5.extend(slice_5)
-    print("\nCPU Player board")
+    print("\nCPU Player Board:")
     print('  '.join(list_1))
     print('  '.join(list_2))
     print('  '.join(list_3))
@@ -503,7 +503,7 @@ def rand_row_and_col():
             print_player_board(random_row_num, random_col_num)
         if len(computer_guesses) > 3:
             break
-    print(f"\n{' '.join(player_name)}'s Board")
+    print(f"\n{' '.join(player_name)}'s Board:")
     print('  '.join(player_list_1))
     print('  '.join(player_list_2))
     print('  '.join(player_list_3))
