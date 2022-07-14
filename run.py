@@ -104,10 +104,10 @@ def user_input_col():
             if y in range(0, 5):
                 break
             elif y not in range(0, 5):
-                print(f"{y} is not between 0 and 4.,", end="")
+                print(f"\n{y} is not between 0 and 4.,", end="")
                 print('Please choose a column number between 0 and 4.')
         except ValueError:
-            print('The value you entered is not a number.', end="")
+            print('\nThe value you entered is not a number.', end="")
             print("Please enter a number.")
     return y
 
@@ -125,10 +125,10 @@ def user_input_row():
             if x in range(0, 5):
                 break
             elif x not in range(0, 5):
-                print(f'{x} is not between 0 and 4.', end="")
+                print(f'\n{x} is not between 0 and 4.', end="")
                 print(" Please choose a number between 0 and 4.\n")
         except ValueError:
-            print('The value you entered is not a number.', end="")
+            print('\nThe value you entered is not a number.', end="")
             print(" Please enter a number.\n")
 
     return x
@@ -208,7 +208,7 @@ def player_input_validator():
             compare_input(player_guess)
             break
         else:
-            print("You have already chosen these coordinates,", end="")
+            print("\nYou have already chosen these coordinates,", end="")
             print(" please try again...")
 
 
@@ -279,7 +279,7 @@ def quit_or_continue(value):
     """
 
     if value == "n":
-        print("Exiting game...")
+        print("\nYou chose to quit. Exiting game...")
         exit()
     else:
         print('\nYou chose to continue...\n')
@@ -291,7 +291,7 @@ def play_new_game_or_quit(value):
     play a new game.
     """
     if value == "n":
-        print("Exiting game...")
+        print("\nYou chose to quit. Exiting game...")
         return True
         exit()
     else:
@@ -323,7 +323,7 @@ def end():
 
 def print_updated_computer_board(row_num, col_num, ship_location):
     """
-    Recieves a row number, column number and a list of lists that contain
+    Receives a row number, column number and a list of lists that contain
     coordinates that represent the cpu ships locations.
     The players coordinate guesses are compared with the cpu's ship
     coordinates.
@@ -343,7 +343,7 @@ def print_updated_computer_board(row_num, col_num, ship_location):
 
 def ship_missed(row_num, col_num):
     """
-    Recieves a row and column number which are used to update lists
+    Receives a row and column number which are used to update lists
     used to print cpu player's board when the player 'misses' any of
     the cpus ships.
     """
@@ -367,7 +367,7 @@ def ship_missed(row_num, col_num):
 
 def ship_hit(row_num, col_num):
     """
-    Recieves a row and column number which are used to update lists
+    Receives a row and column number which are used to update lists
     used to print CPU player's board when the player 'hits' any of the
     CPU's ships.
     """
@@ -391,7 +391,7 @@ def ship_hit(row_num, col_num):
 
 def print_updated_player_board(row_num, col_num, ship_locations):
     """
-    Recieves a row number, column number and a list of lists that contain
+    Receives a row number, column number and a list of lists that contain
     coordinates that represent the players ships locations.
     The cpu coordinate guesses are compared with the players ship coordinates.
     If the two sets of coordinates match, the cpu_hit_ship function is called.
@@ -411,7 +411,7 @@ def print_updated_player_board(row_num, col_num, ship_locations):
 
 def cpu_missed_ship(row_num, col_num):
     """
-    Recieves a row and column number which are used to update lists
+    Receives a row and column number which are used to update lists
     used to print player's board when the cpu 'misses' any of the players
     ships.
     """
@@ -435,7 +435,7 @@ def cpu_missed_ship(row_num, col_num):
 
 def cpu_hit_ship(row_num, col_num):
     """
-    Recieves a row and column number which are used to update lists
+    Receives a row and column number which are used to update lists
     used to print player's board when the cpu 'hits' any of the players ships.
     """
     if row_num == 0:
