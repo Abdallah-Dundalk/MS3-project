@@ -81,6 +81,7 @@ I used a series of lists to store the game data. There is a list for the compute
 
 ## Validator Testing:
 * PEP8 online was used to test the code. No errors were found.
+![pep8 online test result]( assets/images/pep8.jpg)
 
 ## Deployment:
 1. Log into Heroku.

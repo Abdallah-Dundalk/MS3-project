@@ -76,8 +76,8 @@ def intro_msg():
     """
     Prints welcome message to terminal
     """
-    # I borrowed this idea for multiplying character from Code Institute, 
-    # I had been typing each character previously.
+    # I borrowed this idea for multiplying character from Code Institute,
+    # # I had been typing each character previously.
     print("-" * 70)
     print("This is BATTLESHIPS - MAN V MACHINE")
     print("Board size: 5. Number of ships: 4")
