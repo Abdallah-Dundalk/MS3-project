@@ -70,8 +70,11 @@ def intro_msg():
     """
     Prints welcome message to terminal
     """
-    print("Lets Play Battle Ship\n")
-
+    print("-" * 70)
+    print("This is BATTLESHIPS - MAN V MACHINE")
+    print("Board size: 5. Number of ships: 4")
+    print("Top left corner is row: 0, col: 0")
+    print("-" * 70)
 
 def add_name():
     """
@@ -125,7 +128,7 @@ def quit_game_or_continue():
     Prompts user to enter 'n' to quit or any other key to continue
     """
     result = input("Enter any key to continue or n to quit game       ")
-    return result
+    return result.lower()
 
 
 def print_user_input(col, row):
@@ -232,25 +235,25 @@ def player_guess_compare():
     while True:
         player_input_validator()
         cpu_input_validator()
-        print("------------------------------------------------------------")
+        print("-" * 70)
         print(f"At the end of this round, your score is {PLAYER_SCORE}, the Computer's score is {CPU_SCORE}")
-        print("------------------------------------------------------------")
+        print("-" * 70)
         result = quit_game_or_continue()
         quit_or_continue(result)
         if PLAYER_SCORE > 3:
-            print("------------------------------------------------------------")
+            print("-" * 70)
             print("You have sank all of the CPU's ships! Congratulations, you win!")
-            print("------------------------------------------------------------")
+            print("-" * 70)
             break
         elif CPU_SCORE > 3:
-            print("------------------------------------------------------------")
+            print("-" * 70)
             print("The CPU has sank all of your ships! Commiserations, you lose!")
-            print("------------------------------------------------------------")
+            print("-" * 70)
             break
         elif PLAYER_SCORE and CPU_SCORE == 4:
-            print("------------------------------------------------------------")
+            print("-" * 70)
             print("Tie game! All ships have been wiped out lol")
-            print("------------------------------------------------------------")
+            print("-" * 70)
             break
 
 
