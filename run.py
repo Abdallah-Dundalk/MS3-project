@@ -77,7 +77,7 @@ def add_name():
     """
     Prompts user to enter name
     """
-    name = str(input("Enter your name to begin..."))
+    name = str(input("Enter your name to begin:\n"))
     player_name.append(name)
 
 
@@ -90,11 +90,11 @@ def user_input_col():
     """
     while True:
         try:
-            y = int(input("\nChoose a column number\n"))
+            y = int(input("\nChoose a column number:\n"))
             if y in range(0, 5):
                 break
             elif y not in range(0, 5):
-                print(f'{y} not between 0 and 4. Please choose a column number between 0 and 4')
+                print(f'{y} is not between 0 and 4. Please choose a column number between 0 and 4')
         except ValueError:
             print("The value you entered is not a number. Please enter a number")
     return y
@@ -109,11 +109,11 @@ def user_input_row():
     """
     while True:
         try:
-            x = int(input("\nChoose a row number\n"))
+            x = int(input("\nChoose a row number:\n"))
             if x in range(0, 5):
                 break
             elif x not in range(0, 5):
-                print(f'{x} not between 0 and 4. Please choose a number between 0 and 4\n')
+                print(f'{x} is not between 0 and 4. Please choose a number between 0 and 4\n')
         except ValueError:
             print("The value you entered is not a number. Please enter a number\n")
 
@@ -194,7 +194,7 @@ def player_input_validator():
             compare_input(player_guess)
             break
         else:
-            print("You have already chosen these coordinates, try again")
+            print("You have already chosen these coordinates, please try again...")
 
 
 def cpu_input_validator():
@@ -300,7 +300,7 @@ def end():
     """
     Prints 'game over' when game is over.
     """
-    print("\nGame Over\n")
+    print("\nGame Over...\n")
 
 
 def print_updated_computer_board(row_num, col_num, ship_location):
@@ -339,7 +339,7 @@ def ship_missed(row_num, col_num):
         list_4[col_num] = "x"
     elif row_num == 4:
         list_5[col_num] = "x"
-    print("\nCPU Player Board")
+    print("\nCPU Player Board:")
     print('  '.join(list_1))
     print('  '.join(list_2))
     print('  '.join(list_3))
@@ -363,7 +363,7 @@ def ship_hit(row_num, col_num):
         list_4[col_num] = "*"
     elif row_num == 4:
         list_5[col_num] = "*"
-    print("\nCPU Player Board")
+    print("\nCPU Player Board:")
     print('  '.join(list_1))
     print('  '.join(list_2))
     print('  '.join(list_3))
