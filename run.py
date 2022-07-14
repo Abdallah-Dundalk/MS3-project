@@ -1,11 +1,17 @@
 import random
 
+
 computer_board_list = []
 player_board_list = []
 
 # 4 random samples are taken from this list and used for the
 # target ship coordinates.
-computer_ship_locations = [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [3, 0], [3, 1], [3, 2], [3, 3], [3, 4], [4, 0], [4, 1], [4, 2], [4, 3], [4, 4]]
+computer_ship_locations = [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4],
+                           [1, 0], [1, 1], [1, 2], [1, 3], [1, 4],
+                           [2, 0], [2, 1], [2, 2], [2, 3], [2, 4],
+                           [3, 0], [3, 1], [3, 2], [3, 3], [3, 4],
+                           [4, 0], [4, 1], [4, 2], [4, 3], [4, 4]
+                           ]
 
 # list of 4 ships coordinates targeted by player.
 new_cpu_ship_locations = []
@@ -76,6 +82,7 @@ def intro_msg():
     print("Top left corner is row: 0, col: 0")
     print("-" * 70)
 
+
 def add_name():
     """
     Prompts user to enter name
@@ -97,9 +104,13 @@ def user_input_col():
             if y in range(0, 5):
                 break
             elif y not in range(0, 5):
-                print(f'{y} is not between 0 and 4. Please choose a column number between 0 and 4')
+                print(
+                      f'{y} is not between 0 and 4. Please choose a column\
+                      number between 0 and 4'
+                    )
         except ValueError:
-            print("The value you entered is not a number. Please enter a number")
+            print("The value you entered is not a number.\
+                 Please enter a number")
     return y
 
 
@@ -116,9 +127,11 @@ def user_input_row():
             if x in range(0, 5):
                 break
             elif x not in range(0, 5):
-                print(f'{x} is not between 0 and 4. Please choose a number between 0 and 4\n')
+                print(f'{x} is not between 0 and 4. Please choose\
+                     a number between 0 and 4\n')
         except ValueError:
-            print("The value you entered is not a number. Please enter a number\n")
+            print("The value you entered is not a number.\
+                 Please enter a number\n")
 
     return x
 
@@ -197,7 +210,8 @@ def player_input_validator():
             compare_input(player_guess)
             break
         else:
-            print("You have already chosen these coordinates, please try again...")
+            print("You have already chosen these coordinates,\
+                 please try again...")
 
 
 def cpu_input_validator():
@@ -236,18 +250,21 @@ def player_guess_compare():
         player_input_validator()
         cpu_input_validator()
         print("-" * 70)
-        print(f"At the end of this round, your score is {PLAYER_SCORE}, the Computer's score is {CPU_SCORE}")
+        print(f"At the end of this round, your score is {PLAYER_SCORE},\
+             the Computer's score is {CPU_SCORE}")
         print("-" * 70)
         result = quit_game_or_continue()
         quit_or_continue(result)
         if PLAYER_SCORE > 3:
             print("-" * 70)
-            print("You have sank all of the CPU's ships! Congratulations, you win!")
+            print("You have sank all of the CPU's ships!\
+                 Congratulations, you win!")
             print("-" * 70)
             break
         elif CPU_SCORE > 3:
             print("-" * 70)
-            print("The CPU has sank all of your ships! Commiserations, you lose!")
+            print("The CPU has sank all of your ships!\
+                 Commiserations, you lose!")
             print("-" * 70)
             break
         elif PLAYER_SCORE and CPU_SCORE == 4:
