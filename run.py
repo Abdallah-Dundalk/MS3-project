@@ -52,10 +52,10 @@ def reset_game_values():
     Clears all game values and resets scores to zero.
     """
     player_guesses.clear()
+    cpu_guesses.clear()
     computer_guesses.clear()
     computer_board_list.clear()
     new_cpu_ship_locations.clear()
-    cpu_guesses.clear()
     list_1.clear()
     list_2.clear()
     list_3.clear()
