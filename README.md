@@ -16,32 +16,29 @@ When a ship is hit, the corresponding coordinate on the player's board will disp
 ## Existing Features:
 * Input for user name
 
-![User name input]( assets/images/image-one.jpg)
+![Battleships - enter name prompt]( assets/images/image-one.jpg)
 
 * Randomly generated ship locations printed to console.
 
-![User name input]( assets/images/image-two.jpg)
-
-* User is updated with guesses made by both players at the end of each round.
-
-![User name input]( assets/images/image-three.jpg)
+![player boards and enter row number prompt]( assets/images/image-two.jpg)
 
 * Data validation preventing the user from coordinates outside the range of the board.
 * Data validation preventing the player from entering a string value instead of numeric values for the player's guess.
 
-![User name input]( assets/images/image-three.jpg)
+![Data validation error messages for row and column numbers out of range and non numeric input]( assets/images/image-three.jpg)
 
 * Data validation prevents the same coordinates being guessed more than once.
 
-![User name input]( assets/images/image-nine.jpg)
+![Error message for duplicate guess]( assets/images/image-nine.jpg)
 
 * Randomly generated computer guesses.
 * User is updated with score at the end of each round.
 * Player boards are updated following each round.
+* User is updated with guesses made by both players at the end of each round.
 * Scores are incremented between rounds.
 * User is given an option to quit or continue at the end of each round or at the end of each game.
 
-![User name input]( assets/images/image-five.jpg)
+![scores displayed with option for the user to quite or continue. Message displays guesses made by CPU and player. Player boards are updated]( assets/images/image-five.jpg)
 
 ## Future Features:
 * Text based imagery to illustrate when a ship is hit
@@ -86,6 +83,58 @@ I used a series of lists to store the game data. There is a list for the compute
 * PEP8 online was used to test the code. No errors were found.
 
 ## Deployment:
- 
+1. Log into Heroku.
+2. Click "new".
+3. Click "create new app".
+
+![heroku home page]( assets/images/heroku-one.jpg)
+
+4. Under "app name" type in whatever you wish to name your app.
+5. Click "create app".
+
+![heroku create new app page]( assets/images/heroku-two.jpg)
+
+6. Click "settings".
+7. Click "add build pack".
+
+![heroku settings page]( assets/images/heroku-three.jpg)
+
+8. Click "Python" then click "save change".
+9. Click "add build pack" again.
+10. Click "NodeJS" then click "save change".
+
+![heroku add build page]( assets/images/heroku-four.jpg)
+
+11. Ensure Python now displayed above NodeJS. You can drag and drop the Python icon to rearrange the order if neccessary.
+
+![heroku add build pack section]( assets/images/heroku-five.jpg)
+
+12. Near the top of the page, click "deploy".
+13. Find "deployment method" on the left of the screen and click on "connect to Github".
+14. Type repository name into the search bar and click "search".
+15. Click "connect".
+
+![heroku deploy page]( assets/images/heroku-six.jpg)
+
+16. Scroll down to "deploy Github branch" and use drop-down menu to select branch you wish to deploy.
+17. You can click either "Enable automatic deploys" if you want to build the heroku app automatically each time you push a new change to your code to Github, or you can click "deploy branch" to manually build the app. 
+
+![heroku automatic and manual deploy section]( assets/images/heroku-seven.jpg)
+
+18. Assuming you have chosen to manually "deploy branch", click "view" when the app has finished building.
+
+![Heroku completed manual deploy complete section]( assets/images/heroku-nine.jpg)
+
+19. Here is the finished app.
+
+![deployed app]( assets/images/heroku-nine.jpg)
 
 ## Credits:
+
+* Clifford von Wickler, the creator of the opriginal Battleships game.
+* Deployement terminal by Code Institute.
+* My mentor Gurjot Singh for being such a great listener.
+* W3Schools.com for quick refreshers.
+* entechin.com for teaching me how to print without brackets and and commas.
+* stackoverflow for ideas for for loops.
+* Code intitute for providing the knowledge to allow me to code and keeping me on track regarding deadlines.
