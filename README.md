@@ -5,7 +5,7 @@ The game uses the traditional battleship rules where one player tries to guess t
 
 The game can be played here - https://ms3-project-battle-ships.herokuapp.com/
 
-![BATTLESHIPS - MAN V MACHINE Responsive mock up]( (./assets/images/responsive-mock-up.jpeg)
+![BATTLESHIPS - MAN V MACHINE Responsive mock up]((./assets/images/responsive-mock-up.jpeg)
 
 ## How to play:
 
