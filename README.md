@@ -149,4 +149,7 @@ The game_logic function:
 * W3Schools.com for quick refreshers.
 * entechin.com for teaching me how to print without brackets and and commas.
 * stackoverflow for ideas for for loops.
+* Lucidcharts.com for providing tools to make flow charts.
+* Pythontutor.com for providing a means of testing to find cause of errors.
 * Code intitute for providing the knowledge to allow me to code and keeping me on track regarding deadlines.
+
