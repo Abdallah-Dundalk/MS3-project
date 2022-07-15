@@ -37,8 +37,6 @@ player_name = []
 # list of all guesses made by player
 player_guesses = []
 
-# list of all play ship coordinates
-computer_guesses = []
 
 # list of all guesses made by CPU
 cpu_guesses = []
@@ -53,7 +51,7 @@ def reset_game_values():
     """
     player_guesses.clear()
     cpu_guesses.clear()
-    computer_guesses.clear()
+    player_ship_locations.clear()
     computer_board_list.clear()
     new_cpu_ship_locations.clear()
     list_1.clear()
@@ -151,7 +149,7 @@ def print_user_input(col, row):
     print(f'\nYou have chosen row {row} and column {col}.')
 
 
-def cpu_ship_values():
+def gen_cpu_ship_locations():
     """
     Samples 4 values randomly from a list. These coordinate values are then
     added to another list and repesent the ship locations targeted by
@@ -181,7 +179,7 @@ def compare_cpu_input(input_value):
     values that represent players ship locations.
     """
     global CPU_SCORE
-    if input_value in computer_guesses:
+    if input_value in player_ship_locations:
         print("The Computer scored a direct hit!!!")
         CPU_SCORE += 1
     else:
@@ -236,7 +234,7 @@ def cpu_input_validator():
             break
 
 
-def player_guess_compare():
+def game_logic():
     """
     This function is a loop that accepts player and cpu guesses, then validates
     the player guesses are not text and with range 0 -4. The guesses are then
@@ -402,7 +400,7 @@ def print_updated_player_board(row_num, col_num, ship_locations):
     """
 
     ship_location = [row_num, col_num]
-    ship_locations = computer_guesses
+    ship_locations = player_ship_locations
     row_num = ship_location[0]
     col_num = ship_location[1]
     if ship_location in ship_locations:
@@ -499,10 +497,11 @@ def slice_list_for_player_board(list):
     player_list_5.extend(slice_5)
 
 
-def rand_row_and_col():
+def gen_and_print_player_ships():
     """
+    Radomly generates player ship locations and prints to CPUs board.
     This function generates two random integers, one for row and
-    one for column. The row and column numnber are then appended to
+    one for column. The row and column number are then appended to
     the "storage" list.
     The function then checks if the 'computer_storage'
     list contains the 'storage' list.
@@ -518,10 +517,10 @@ def rand_row_and_col():
         storage = []
         storage.append(random_row_num)
         storage.append(random_col_num)
-        if storage not in computer_guesses:
-            computer_guesses.append(storage)
+        if storage not in player_ship_locations:
+            player_ship_locations.append(storage)
             print_player_board(random_row_num, random_col_num)
-        if len(computer_guesses) > 3:
+        if len(player_ship_locations) > 3:
             break
     print(f"\n{' '.join(player_name)}'s Board:")
     print('  '.join(player_list_1))
@@ -573,9 +572,6 @@ def print_cpu_input(row, col):
     print(f'\nComputer has chosen row {row} and column {col}')
 
 
-test_list = []
-
-
 def generate_list():
     """
     Generates a list of 25 full stops that will be used by
@@ -597,9 +593,9 @@ def main():
         generate_list()
         print_cpus_board(generate_list())
         slice_list_for_player_board(generate_list())
-        cpu_ship_values()
-        rand_row_and_col()
-        player_guess_compare()
+        gen_cpu_ship_locations()
+        gen_and_print_player_ships()
+        game_logic()
         end()
         result = quit_game_or_continue()
         if play_new_game_or_quit(result):
