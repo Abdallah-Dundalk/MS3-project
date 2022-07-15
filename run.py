@@ -82,6 +82,8 @@ def intro_msg():
     # # I had been typing each character previously.
     print("-" * 70)
     print("This is BATTLESHIPS - MAN V MACHINE")
+    # This wording is taken directly from the code institute Battleships game
+    # as it is the most concise way to orientate the player
     print("Board size: 5. Number of ships: 4")
     print("Top left corner is row: 0, col: 0")
     print("-" * 70)
