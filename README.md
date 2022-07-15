@@ -48,6 +48,17 @@ The computer's ships are not visible to the user, hence the requirement for the 
 ## Data Model:
 I used a series of lists to store the game data. There is a list for the computers and players ship locations, guesses, player boards and variables for the scores and the player's name.
 
+## FLow Charts:
+The below flow charts illustrate the two main functions of this programme, main and game_logic.
+
+The main function:
+
+![Main function flow chart]( assets/images/main-function.jpeg)
+
+The game_logic function:
+
+![game logic function flow chart]( assets/images/game-logic.jpeg)
+
 ## Testing:
 * Every coordinate from (0, 0) - (4, 4) entered to ensure the values on the board update with an x.
 * Played countless rounds to ensure all coordinates update with an "x" for a miss and "*" for a hit.
