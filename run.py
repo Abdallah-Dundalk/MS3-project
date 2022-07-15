@@ -1,8 +1,8 @@
 import random
 
-
-computer_board_list = []
-player_board_list = []
+# ist containign 25 full stops that will be sliced into 5 rows for
+# printing boards
+board_list = []
 
 # 4 random samples are taken from this list and used for the
 # target ship coordinates.
@@ -18,20 +18,26 @@ new_cpu_ship_locations = []
 
 # list of 4 ships coordinates targeted by CPU.
 player_ship_locations = []
+
+# These lists are used to print rows for cpu board.
 list_1 = []
 list_2 = []
 list_3 = []
 list_4 = []
 list_5 = []
 
+# These lists are used to to print rows for players board.
 player_list_1 = []
 player_list_2 = []
 player_list_3 = []
 player_list_4 = []
 player_list_5 = []
 
+# These variables contain players scores.
 PLAYER_SCORE = 0
 CPU_SCORE = 0
+
+# This variable stores the players name
 player_name = []
 
 # list of all guesses made by player
@@ -41,9 +47,6 @@ player_guesses = []
 # list of all guesses made by CPU
 cpu_guesses = []
 
-# need to change this code becuase it doenst need to be shuffled, just print
-#  5 lists of "."
-
 
 def reset_game_values():
     """
@@ -52,8 +55,9 @@ def reset_game_values():
     player_guesses.clear()
     cpu_guesses.clear()
     player_ship_locations.clear()
-    computer_board_list.clear()
+    board_list.clear()
     new_cpu_ship_locations.clear()
+    player_name.clear()
     list_1.clear()
     list_2.clear()
     list_3.clear()
@@ -89,6 +93,161 @@ def add_name():
     """
     name = str(input("Enter your name to begin:\n"))
     player_name.append(name)
+
+
+def generate_list():
+    """
+    Generates a list of 25 full stops that will be used by
+    another function to create player boards
+    """
+    for x in range(25):
+        board_list.append(".")
+    return board_list
+
+
+def print_cpus_board(list):
+    """
+    Slices a list of full stops before printing 5 lists to represent
+    computers player board.
+    """
+    slice_1 = list[0:5]
+    list_1.extend(slice_1)
+    slice_2 = list[5:10]
+    list_2.extend(slice_2)
+    slice_3 = list[10:15]
+    list_3.extend(slice_3)
+    slice_4 = list[15:20]
+    list_4.extend(slice_4)
+    slice_5 = list[20:25]
+    list_5.extend(slice_5)
+    print("\nCPU Player Board:")
+    print('  '.join(list_1))
+    print('  '.join(list_2))
+    print('  '.join(list_3))
+    print('  '.join(list_4))
+    print('  '.join(list_5))
+
+
+def print_player_board(row_num, col_num):
+    """
+    Takes two integers and updates the values in each player_list variable with
+    an '@' symbol to represent a ships location.
+    """
+    if row_num == 0:
+        player_list_1[col_num] = "@"
+    elif row_num == 1:
+        player_list_2[col_num] = "@"
+    elif row_num == 2:
+        player_list_3[col_num] = "@"
+    elif row_num == 3:
+        player_list_4[col_num] = "@"
+    elif row_num == 4:
+        player_list_5[col_num] = "@"
+
+
+def slice_list_for_player_board(list):
+    """
+    Recieves a list and slices it into 5 lists that will
+    be used to by another fucntion to print player board.
+    """
+    slice_1 = list[0:5]
+    player_list_1.extend(slice_1)
+    slice_2 = list[5:10]
+    player_list_2.extend(slice_2)
+    slice_3 = list[10:15]
+    player_list_3.extend(slice_3)
+    slice_4 = list[15:20]
+    player_list_4.extend(slice_4)
+    slice_5 = list[20:25]
+    player_list_5.extend(slice_5)
+
+
+def gen_cpu_ship_locations():
+    """
+    Samples 4 values randomly from a list. These coordinate values are then
+    added to another list and repesent the ship locations targeted by
+    the player.
+    """
+    four_ship_locations = random.sample(computer_ship_locations, 4)
+    new_cpu_ship_locations.extend(four_ship_locations)
+
+
+def gen_and_print_player_ships():
+    """
+    Radomly generates player ship locations and prints to CPUs board.
+    This function generates two random integers, one for row and
+    one for column. The row and column number are then appended to
+    the "storage" list.
+    The function then checks if the 'computer_storage'
+    list contains the 'storage' list.
+    If the computer_storage list does not already contain the 'storage' value,
+    the 'storage' list is appended.
+    When the storage list has been appended to the computer_storage list
+    4 times, the function then prints the player lists which have been updated
+    using the values from the computer storage list.
+    """
+    while True:
+        random_row_num = random.randint(0, 4)
+        random_col_num = random.randint(0, 4)
+        storage = []
+        storage.append(random_row_num)
+        storage.append(random_col_num)
+        if storage not in player_ship_locations:
+            player_ship_locations.append(storage)
+            print_player_board(random_row_num, random_col_num)
+        if len(player_ship_locations) > 3:
+            break
+    print(f"\n{' '.join(player_name)}'s Board:")
+    print('  '.join(player_list_1))
+    print('  '.join(player_list_2))
+    print('  '.join(player_list_3))
+    print('  '.join(player_list_4))
+    print('  '.join(player_list_5))
+
+
+def game_logic():
+    """
+    This function is a loop that accepts player and cpu guesses, then validates
+    the player guesses are not text or outside range 0 - 4. The guesses are
+    then printed. Then the scores are printed and incremented by 1 if
+    any player hits a ship. Then the player is prompted to enter values to
+    either continue playing the game or quit. If the player continues, the
+    loop begins again and will end only if the player quits or the score
+    increments to 4.
+    """
+    while True:
+        player_input_validator()
+        cpu_input_validator()
+        print("-" * 70)
+        print("At the end of this round, your score is ", end="")
+        print(f"{PLAYER_SCORE}, the Computer's score is {CPU_SCORE}")
+        print("-" * 70)
+        result = quit_game_or_continue_input()
+        quit_or_continue(result)
+        if PLAYER_SCORE > 3 and CPU_SCORE < 4:
+            print("-" * 70)
+            print("You have sank all of the CPU's ships! ", end="")
+            print("Congratulations, you win!")
+            print("-" * 70)
+            break
+        elif CPU_SCORE > 3 and PLAYER_SCORE < 4:
+            print("-" * 70)
+            print("The CPU has sank all of your ships!", end="")
+            print("Commiserations, you lose!")
+            print("-" * 70)
+            break
+        elif PLAYER_SCORE == 4 and CPU_SCORE == 4:
+            print("-" * 70)
+            print("Tie game! All ships have been wiped out lol")
+            print("-" * 70)
+            break
+
+
+def end():
+    """
+    Prints 'game over' when game is over.
+    """
+    print("\nGame Over...\n")
 
 
 def user_input_col():
@@ -134,12 +293,39 @@ def user_input_row():
     return x
 
 
-def quit_game_or_continue():
+def quit_game_or_continue_input():
     """
-    Prompts user to enter 'n' to quit or any other key to continue
+    prompts user to continue or quit programme. The input is forced
+    to lowercase.
     """
     result = input("Enter any key to continue or n to quit game.       ")
     return result.lower()
+
+
+def quit_or_continue(value):
+    """
+    Recieves one value, 'n' to quite programe or any other key to
+    continue playing the game.
+    """
+
+    if value == "n":
+        print("\nYou chose to quit. Exiting game...")
+        exit()
+    else:
+        print('\nYou chose to continue...\n')
+
+
+def play_new_game_or_quit(value):
+    """
+    Recieves one value, 'n' to quite programe or any other key to
+    play a new game.
+    """
+    if value == "n":
+        print("\nYou chose to quit. Exiting game...")
+        return True
+        exit()
+    else:
+        print('\nStarting new game...\n')
 
 
 def print_user_input(col, row):
@@ -149,14 +335,11 @@ def print_user_input(col, row):
     print(f'\nYou have chosen row {row} and column {col}.')
 
 
-def gen_cpu_ship_locations():
+def print_cpu_input(row, col):
     """
-    Samples 4 values randomly from a list. These coordinate values are then
-    added to another list and repesent the ship locations targeted by
-    the player.
+    Prints message informing the user of the coloumn and row numbers chosen.
     """
-    four_ship_locations = random.sample(computer_ship_locations, 4)
-    new_cpu_ship_locations.extend(four_ship_locations)
+    print(f'\nComputer has chosen row {row} and column {col}')
 
 
 def compare_input(input_value):
@@ -234,70 +417,6 @@ def cpu_input_validator():
             break
 
 
-def game_logic():
-    """
-    This function is a loop that accepts player and cpu guesses, then validates
-    the player guesses are not text and with range 0 -4. The guesses are then
-    printed. Then the scores are printed and the scores are incremented by 1 if
-    any player hits a ship. The the player is prompted to enter values to
-    either continue playing the game or quit. If the player continues, the
-    loop begins again and will end only if the player quits or the score
-    increments to 4.
-    """
-    while True:
-        player_input_validator()
-        cpu_input_validator()
-        print("-" * 70)
-        print("At the end of this round, your score is ", end="")
-        print(f"{PLAYER_SCORE}, the Computer's score is {CPU_SCORE}")
-        print("-" * 70)
-        result = quit_game_or_continue()
-        quit_or_continue(result)
-        if PLAYER_SCORE > 3 and CPU_SCORE < 4:
-            print("-" * 70)
-            print("You have sank all of the CPU's ships! ", end="")
-            print("Congratulations, you win!")
-            print("-" * 70)
-            break
-        elif CPU_SCORE > 3 and PLAYER_SCORE < 4:
-            print("-" * 70)
-            print("The CPU has sank all of your ships!", end="")
-            print("Commiserations, you lose!")
-            print("-" * 70)
-            break
-        elif PLAYER_SCORE == 4 and CPU_SCORE == 4:
-            print("-" * 70)
-            print("Tie game! All ships have been wiped out lol")
-            print("-" * 70)
-            break
-
-
-def quit_or_continue(value):
-    """
-    Recieves one value, 'n' to quite programe or any other key to
-    continue playing the game.
-    """
-
-    if value == "n":
-        print("\nYou chose to quit. Exiting game...")
-        exit()
-    else:
-        print('\nYou chose to continue...\n')
-
-
-def play_new_game_or_quit(value):
-    """
-    Recieves one value, 'n' to quite programe or any other key to
-    play a new game.
-    """
-    if value == "n":
-        print("\nYou chose to quit. Exiting game...")
-        return True
-        exit()
-    else:
-        print('\nStarting new game...\n')
-
-
 def store_cpu_guesses(row_num, col_num):
     """
     Appends two integers (CPU players row and column guess) to cpu_guesses
@@ -312,13 +431,6 @@ def store_player_guesses(row_num, col_num):
     variable as a list.
     """
     player_guesses.append([row_num, col_num])
-
-
-def end():
-    """
-    Prints 'game over' when game is over.
-    """
-    print("\nGame Over...\n")
 
 
 def print_updated_computer_board(row_num, col_num, ship_location):
@@ -339,6 +451,26 @@ def print_updated_computer_board(row_num, col_num, ship_location):
         ship_hit(row_num, col_num)
     else:
         ship_missed(row_num, col_num)
+
+
+def print_updated_player_board(row_num, col_num, ship_locations):
+    """
+    Receives a row number, column number and a list of lists that contain
+    coordinates that represent the players ships locations.
+    The cpu coordinate guesses are compared with the players ship coordinates.
+    If the two sets of coordinates match, the cpu_hit_ship function is called.
+    If the two sets of coordinates do not match, the cpu_missed_ship function
+    is called.
+    """
+
+    ship_location = [row_num, col_num]
+    ship_locations = player_ship_locations
+    row_num = ship_location[0]
+    col_num = ship_location[1]
+    if ship_location in ship_locations:
+        cpu_hit_ship(row_num, col_num)
+    else:
+        cpu_missed_ship(row_num, col_num)
 
 
 def ship_missed(row_num, col_num):
@@ -389,26 +521,6 @@ def ship_hit(row_num, col_num):
     print('  '.join(list_5))
 
 
-def print_updated_player_board(row_num, col_num, ship_locations):
-    """
-    Receives a row number, column number and a list of lists that contain
-    coordinates that represent the players ships locations.
-    The cpu coordinate guesses are compared with the players ship coordinates.
-    If the two sets of coordinates match, the cpu_hit_ship function is called.
-    If the two sets of coordinates do not match, the cpu_missed_ship function
-    is called.
-    """
-
-    ship_location = [row_num, col_num]
-    ship_locations = player_ship_locations
-    row_num = ship_location[0]
-    col_num = ship_location[1]
-    if ship_location in ship_locations:
-        cpu_hit_ship(row_num, col_num)
-    else:
-        cpu_missed_ship(row_num, col_num)
-
-
 def cpu_missed_ship(row_num, col_num):
     """
     Receives a row and column number which are used to update lists
@@ -456,80 +568,6 @@ def cpu_hit_ship(row_num, col_num):
     print('  '.join(player_list_5))
 
 
-def print_cpus_board(list):
-    """
-    Slices a list of full stops before printing 5 lists to represent
-    computers player board.
-    """
-
-    slice_1 = list[0:5]
-    list_1.extend(slice_1)
-    slice_2 = list[5:10]
-    list_2.extend(slice_2)
-    slice_3 = list[10:15]
-    list_3.extend(slice_3)
-    slice_4 = list[15:20]
-    list_4.extend(slice_4)
-    slice_5 = list[20:25]
-    list_5.extend(slice_5)
-    print("\nCPU Player Board:")
-    print('  '.join(list_1))
-    print('  '.join(list_2))
-    print('  '.join(list_3))
-    print('  '.join(list_4))
-    print('  '.join(list_5))
-
-
-def slice_list_for_player_board(list):
-    """
-    Recieves a list and slices it into 5 lists that will
-    be used to by another fucntion to print player board.
-    """
-    slice_1 = list[0:5]
-    player_list_1.extend(slice_1)
-    slice_2 = list[5:10]
-    player_list_2.extend(slice_2)
-    slice_3 = list[10:15]
-    player_list_3.extend(slice_3)
-    slice_4 = list[15:20]
-    player_list_4.extend(slice_4)
-    slice_5 = list[20:25]
-    player_list_5.extend(slice_5)
-
-
-def gen_and_print_player_ships():
-    """
-    Radomly generates player ship locations and prints to CPUs board.
-    This function generates two random integers, one for row and
-    one for column. The row and column number are then appended to
-    the "storage" list.
-    The function then checks if the 'computer_storage'
-    list contains the 'storage' list.
-    If the computer_storage list does not already contain the 'storage' value,
-    the 'storage' list is appended.
-    When the storage list has been appended to the computer_storage list
-    4 times, the function then prints the player lists which have been updated
-    using the values from the computer storage list.
-    """
-    while True:
-        random_row_num = random.randint(0, 4)
-        random_col_num = random.randint(0, 4)
-        storage = []
-        storage.append(random_row_num)
-        storage.append(random_col_num)
-        if storage not in player_ship_locations:
-            player_ship_locations.append(storage)
-            print_player_board(random_row_num, random_col_num)
-        if len(player_ship_locations) > 3:
-            break
-    print(f"\n{' '.join(player_name)}'s Board:")
-    print('  '.join(player_list_1))
-    print('  '.join(player_list_2))
-    print('  '.join(player_list_3))
-    print('  '.join(player_list_4))
-    print('  '.join(player_list_5))
-
-
 def rand_row_num():
     """
     Randomly generates an interger between 0 and 4 and returns this value.
@@ -548,40 +586,6 @@ def rand_col_num():
     return random_col_num
 
 
-def print_player_board(row_num, col_num):
-    """
-    Takes two integers and updates the values in each player_list variable with
-    an '@' symbol to represent a ships location.
-    """
-    if row_num == 0:
-        player_list_1[col_num] = "@"
-    elif row_num == 1:
-        player_list_2[col_num] = "@"
-    elif row_num == 2:
-        player_list_3[col_num] = "@"
-    elif row_num == 3:
-        player_list_4[col_num] = "@"
-    elif row_num == 4:
-        player_list_5[col_num] = "@"
-
-
-def print_cpu_input(row, col):
-    """
-    Prints message informing the user of the coloumn and row numbers chosen.
-    """
-    print(f'\nComputer has chosen row {row} and column {col}')
-
-
-def generate_list():
-    """
-    Generates a list of 25 full stops that will be used by
-    another function to create player boards
-    """
-    for x in range(25):
-        computer_board_list.append(".")
-    return computer_board_list
-
-
 def main():
     """
     Runs all functions
@@ -597,7 +601,7 @@ def main():
         gen_and_print_player_ships()
         game_logic()
         end()
-        result = quit_game_or_continue()
+        result = quit_game_or_continue_input()
         if play_new_game_or_quit(result):
             exit()
 
